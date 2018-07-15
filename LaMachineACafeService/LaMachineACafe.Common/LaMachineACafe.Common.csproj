@@ -41,10 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Model\Drink.cs" />
     <Compile Include="Model\DrinkSelection.cs" />
-    <Compile Include="Model\IWithId.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceResponse\BaseResponse.cs" />
     <Compile Include="ServiceResponse\ResultCodeEnum.cs" />
