@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="LaMachineACafeService.Service1" CodeBehind="LaMachineACafeService.svc.cs" %>

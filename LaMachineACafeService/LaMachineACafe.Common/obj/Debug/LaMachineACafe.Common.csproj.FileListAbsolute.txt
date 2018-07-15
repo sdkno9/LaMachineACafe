@@ -1,0 +1,5 @@
+C:\Github\LaMachineACafe\LaMachineACafeService\LaMachineACafe.Common\bin\Debug\LaMachineACafe.Common.dll
+C:\Github\LaMachineACafe\LaMachineACafeService\LaMachineACafe.Common\bin\Debug\LaMachineACafe.Common.pdb
+C:\Github\LaMachineACafe\LaMachineACafeService\LaMachineACafe.Common\obj\Debug\LaMachineACafe.Common.csprojResolveAssemblyReference.cache
+C:\Github\LaMachineACafe\LaMachineACafeService\LaMachineACafe.Common\obj\Debug\LaMachineACafe.Common.dll
+C:\Github\LaMachineACafe\LaMachineACafeService\LaMachineACafe.Common\obj\Debug\LaMachineACafe.Common.pdb
