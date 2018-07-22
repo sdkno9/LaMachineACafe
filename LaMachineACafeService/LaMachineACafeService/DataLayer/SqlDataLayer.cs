@@ -13,10 +13,10 @@ namespace LaMachineACafe.Common
         public SqlDataLayer()
         {
             string dbName;
-#if DEBUG
-            dbName = "LaMachineACafeDevAndTest";
-#else
+#if PROD
             dbName = "LaMachineACafe";
+#else
+            dbName = "LaMachineACafeDevAndTest";
 #endif
 
             connectionString = string.Format("Server=localhost\\SQLEXPRESS;Database={0};Trusted_Connection=True;", dbName);
