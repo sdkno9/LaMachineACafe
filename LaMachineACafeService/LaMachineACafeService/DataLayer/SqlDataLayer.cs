@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
@@ -13,7 +12,14 @@ namespace LaMachineACafe.Common
         private readonly string connectionString;
         public SqlDataLayer()
         {
-            connectionString = ConfigurationManager.ConnectionStrings["sqlServerConnectionString"].ConnectionString;
+            string dbName;
+#if DEBUG
+            dbName = "LaMachineACafeDevAndTest";
+#else
+            dbName = "LaMachineACafe";
+#endif
+
+            connectionString = string.Format("Server=localhost\\SQLEXPRESS;Database={0};Trusted_Connection=True;", dbName);
         }
 
         public List<T> ExecuteQuery<T>(SqlQueryBuilder query)
@@ -36,10 +42,15 @@ namespace LaMachineACafe.Common
         public void Update<T>(T objetToUpdate)
              where T : class, new()
         {
-            Update(
-                tableName: SqlHelpers.TypeToTableName[objetToUpdate.GetType()],
+            Update(tableName: SqlHelpers.TypeToTableName[objetToUpdate.GetType()],
                 fields: ObjectToFieldDic<T>(objetToUpdate),
                 identityFieldName: SqlHelpers.TypeToIdentityFieldName[objetToUpdate.GetType()]);
+        }
+
+        public void Delete<T>(string fieldName, List<object> values)
+             where T : class, new()
+        {
+            Delete(SqlHelpers.TypeToTableName[typeof(T)], fieldName, values);
         }
 
         private T ExtractObjectFromFieldDic<T>(
@@ -103,7 +114,7 @@ namespace LaMachineACafe.Common
                 "INSERT INTO {0} ({1}) VALUES ({2})",
                 tableName,
                 string.Join(",", fields.Keys.ToArray()),
-                string.Join(",", fields.Select(p => p.Value).ToArray())
+                string.Join(",", fields.Select(p => SqlHelpers.DecorateSqlValue(p.Value.AsSqlString())).ToArray())
                 ));
         }
 
@@ -114,10 +125,18 @@ namespace LaMachineACafe.Common
             ExecuteNonQuery(string.Format(
                 "UPDATE {0} SET {1} WHERE {2} = '{3}'",
                 tableName,
-                identityFieldName,
                 string.Join(",", updateKeyValuePairs.ToArray()),
-                fields[identityFieldName].AsSqlString()
-                ));
+                identityFieldName,
+                fields[identityFieldName].AsSqlString()));
+        }
+
+        private void Delete(string tableName, string fieldName, List<object> values)
+        {
+            ExecuteNonQuery(string.Format(
+                "DELETE FROM {0} WHERE {1} IN {2}",
+                tableName,
+                fieldName,
+                "(" + string.Join(",", values.Select(v => SqlHelpers.DecorateSqlValue(v.AsSqlString())).ToArray()) + ")"));
         }
 
         private static List<string> GetUpdateKeyValuePairs(string tableName, Dictionary<string, object> fields)
@@ -141,15 +160,7 @@ namespace LaMachineACafe.Common
                 using (SqlCommand command = connection.CreateCommand())
                 {
                     command.CommandText = queryString;
-
-                    try
-                    {
-                        command.ExecuteNonQuery();
-                    }
-                    catch
-                    {
-                        throw;
-                    }
+                    command.ExecuteNonQuery();
                 }
             }
         }

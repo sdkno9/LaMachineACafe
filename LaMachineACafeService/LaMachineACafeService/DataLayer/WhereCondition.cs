@@ -3,17 +3,15 @@ using System.Globalization;
 
 namespace LaMachineACafe.Common
 {
-    public class WhereCondition
+    public class WhereCondition : SqlCondition
     {
-        public string TableName { get; private set; }
         public string FieldName { get; private set; }
         public object Value { get; private set; }
         public SqlComparisonEnum Comparison { get; private set; }
 
-        public WhereCondition(string fieldName, string tableName, object value, SqlComparisonEnum comparison)
+        public WhereCondition(string tableName, string fieldName, object value, SqlComparisonEnum comparison) : base(tableName)
         {
             FieldName = fieldName;
-            TableName = tableName;
             Value = value;
             Comparison = comparison;
         }
@@ -35,6 +33,21 @@ namespace LaMachineACafe.Common
                     FieldName,
                     SqlHelpers.SqlComparisonEnumToString[Comparison],
                     SqlHelpers.DecorateSqlValue(Value.AsSqlString()));
+
+            if (this.And != null)
+            {
+                thisConditionStr = string.Format(CultureInfo.InvariantCulture, "(({0}) AND ({1}))",
+                    thisConditionStr,
+                    this.And.ToString());
+            }
+
+            if (this.Or != null)
+            {
+                thisConditionStr = string.Format(CultureInfo.InvariantCulture, "(({0}) OR ({1}))",
+                    thisConditionStr,
+                    this.Or.ToString());
+            }
+
             return thisConditionStr;
         }
     }

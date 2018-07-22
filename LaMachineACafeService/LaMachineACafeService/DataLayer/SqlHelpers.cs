@@ -9,11 +9,14 @@ namespace LaMachineACafe.Common
     public static class SqlHelpers
     {
         public static readonly string BadgeReferenceFieldName = "BadgeReference";
+        public static readonly string DrinkIdFieldName = "Drink_Id";
+        public static readonly string IdFieldName = "Id";
+        public static readonly string NameFieldName = "Name";
 
         public static Dictionary<Type, string> TypeToTableName = new Dictionary<Type, string>()
         {
             { typeof(Drink), "DrinksTable" },
-            { typeof(DrinkSelection), "DrinkPreferencesTable" }
+            { typeof(DrinkSelection), "DrinkSelectionsTable" }
         };
 
         public static Dictionary<Type, string> TypeToIdentityFieldName = new Dictionary<Type, string>()

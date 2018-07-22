@@ -1,0 +1,10 @@
+C:\Github\LaMachineACafe\LaMachineACafeService\UnitTests\bin\Debug\UnitTests.dll
+C:\Github\LaMachineACafe\LaMachineACafeService\UnitTests\bin\Debug\UnitTests.pdb
+C:\Github\LaMachineACafe\LaMachineACafeService\UnitTests\bin\Debug\LaMachineACafe.Common.dll
+C:\Github\LaMachineACafe\LaMachineACafeService\UnitTests\bin\Debug\LaMachineACafeService.dll
+C:\Github\LaMachineACafe\LaMachineACafeService\UnitTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Github\LaMachineACafe\LaMachineACafeService\UnitTests\bin\Debug\LaMachineACafe.Common.pdb
+C:\Github\LaMachineACafe\LaMachineACafeService\UnitTests\bin\Debug\LaMachineACafeService.pdb
+C:\Github\LaMachineACafe\LaMachineACafeService\UnitTests\obj\Debug\UnitTests.csprojResolveAssemblyReference.cache
+C:\Github\LaMachineACafe\LaMachineACafeService\UnitTests\obj\Debug\UnitTests.dll
+C:\Github\LaMachineACafe\LaMachineACafeService\UnitTests\obj\Debug\UnitTests.pdb

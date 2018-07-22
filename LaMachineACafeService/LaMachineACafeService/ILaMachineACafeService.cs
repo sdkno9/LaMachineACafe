@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 
-namespace LaMachineACafeService
+namespace LaMachineACafe.Service
 {
     [ServiceContract]
     public interface ILaMachineACafeService
@@ -23,7 +23,7 @@ namespace LaMachineACafeService
             UriTemplate = "drinkSelection/?badgeNumber={badgeNumber}",
             RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json)]
-        BaseResponse<DrinkSelection> GetLastDrinkSelection(string badgeReference);
+        BaseResponse<DrinkSelection> GetDrinkSelection(string badgeReference);
 
         [OperationContract]
         [WebInvoke(
@@ -32,6 +32,6 @@ namespace LaMachineACafeService
             UriTemplate = "drinkSelection/",
             RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json)]
-        BaseResponse AddOrUpdateDrinkSelection(DrinkSelection drinkSelection);
+        BaseResponse<DrinkSelection> AddOrUpdateDrinkSelection(DrinkSelection drinkSelection);
     }
 }
